@@ -5,12 +5,23 @@
 
 from setuptools import find_packages, setup
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+    # remove header
+    header_lines = 3
+    long_description = long_description.split("\n", header_lines)[header_lines]
+
+project_urls = {
+    'Documentation': "https://github.com/bakobako/kcf-tools"
+}
+
 setup(
     name='kcf-tools',
-    version='0.0.14',
+    version='0.0.15',
     description="CLI tools for generating documentation and config schemas for Keboola Component development",
-    long_description="readme",
+    long_description=long_description,
     long_description_content_type="text/markdown",
+    project_urls=project_urls,
     author="Adam Bako @bakobako",
     author_email='adam.bako@keboola.com',
     url='https://github.com/bakobako/kcf-tools',
