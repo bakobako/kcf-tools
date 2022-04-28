@@ -4,7 +4,7 @@ from .readme_maker import ReadMeMaker
 
 DEFAULT_DATA_FOLDER_DIR = "data"
 DEFAULT_COMPONENT_CONFIG_FOLDER_DIR = "component_config"
-DEFAULT_OUTPUT_LOC = "generated.md"
+DEFAULT_FILE_NAME = "generated.md"
 
 
 def create_dir(directory):
@@ -16,12 +16,20 @@ def create_dir(directory):
 
 def generate_readme(data_dir: str = DEFAULT_DATA_FOLDER_DIR,
                     component_config_dir: str = DEFAULT_COMPONENT_CONFIG_FOLDER_DIR,
-                    output_loc: str = DEFAULT_OUTPUT_LOC):
-    create_dir("generated")
-    create_dir("generated/readme")
+                    file_name: str = DEFAULT_FILE_NAME,
+                    write_live: bool = False):
+    if not write_live:
+        create_dir("generated")
+        create_dir("generated/readme")
+
     rm = ReadMeMaker(component_config_dir, data_dir)
     rm.generate_readme()
-    output_loc = os.path.join("generated", "readme", output_loc)
+
+    if write_live:
+        output_loc = os.path.join("README.md")
+    else:
+        output_loc = os.path.join("generated", "readme", file_name)
+
     rm.save_readme(output_loc)
 
 

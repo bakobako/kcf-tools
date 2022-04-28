@@ -17,7 +17,7 @@ NECESSARY_PATHS = ["data",
                    path.join("component_config", "configRowSchema.json")]
 
 
-class DirectoryError(Exception):
+class DirectoryError(SystemExit):
     pass
 
 
@@ -50,15 +50,15 @@ def generate():
 @click.option(
     '-w',
     is_flag=True,
-    help='Overwrites existing files'
+    help='Writes files to component'
 )
 @click.command(name='readme', short_help='generate readme for component')
-def generate_readme(w):
+def generate_readme(w: bool):
     """This function generates a README file for your component"""
     logging.info("Generating Readme...")
     logging.info(f"write : {w}")
     check_directories()
-    gen.generate_readme()
+    gen.generate_readme(write_live=w)
 
 
 @click.command(name='docs', short_help='generate help.keboola.com documentation for component')

@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='kcf-tools',
-    version='0.0.9',
+    version='0.0.10',
     description="CLI tools for generating documentation and config schemas for Keboola Component development",
     long_description="readme",
     long_description_content_type="text/markdown",
