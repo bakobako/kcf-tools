@@ -33,7 +33,6 @@ setup(
         'Pygments==2.11.2'
     ],
     zip_safe=False,
-    keywords='obs-img-utils obs_img_utils',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
