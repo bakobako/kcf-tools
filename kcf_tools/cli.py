@@ -1,11 +1,31 @@
 import click
 import logging
+from os import path
 
 from kcf_tools import generate as gen
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+NECESSARY_PATHS = ["data",
+                   "component_config",
+                   path.join("data", "config.json"),
+                   path.join("component_config", "component_short_description.md"),
+                   path.join("component_config", "component_long_description.md"),
+                   path.join("component_config", "configSchema.json"),
+                   path.join("component_config", "configRowSchema.json")]
+
+
+class DirectoryError(Exception):
+    pass
+
+
+def check_directories():
+    for necessary_path in NECESSARY_PATHS:
+        if not path.exists(necessary_path):
+            raise DirectoryError(
+                f"You can only run \'generate\' in a component directory. Could not find {necessary_path}")
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
@@ -37,6 +57,7 @@ def generate_readme(w):
     """This function generates a README file for your component"""
     logging.info("Generating Readme...")
     logging.info(f"write : {w}")
+    check_directories()
     gen.generate_readme()
 
 
