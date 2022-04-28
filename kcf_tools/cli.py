@@ -1,8 +1,10 @@
 import click
 import logging
 
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
-@click.group()
+
+@click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option()
 @click.pass_context
 def main(context):
@@ -21,13 +23,15 @@ def generate():
     """
 
 
-@click.command(name='readme')
+@click.command(name='readme', short_help='generate readme for component')
 def generate_readme():
+    """This function generates a README file for your component"""
     logging.info("Generating Readme...")
 
 
-@click.command(name='help')
+@click.command(name='help', short_help='generate help.keboola.com documentation for component')
 def generate_help():
+    """This function generates documentation for help.keboola.com for your component"""
     logging.info("Generating Help...")
 
 
