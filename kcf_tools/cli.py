@@ -31,10 +31,10 @@ def generate():
     help='Overwrites existing files'
 )
 @click.command(name='readme', short_help='generate readme for component')
-def generate_readme(write_live):
+def generate_readme(w):
     """This function generates a README file for your component"""
     logging.info("Generating Readme...")
-    logging.info(write_live)
+    logging.info(f"write : {w}")
 
 
 @click.command(name='docs', short_help='generate help.keboola.com documentation for component')
