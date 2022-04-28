@@ -1,10 +1,13 @@
 import os
+import logging
 
 from .readme_maker import ReadMeMaker
 
 DEFAULT_DATA_FOLDER_DIR = "data"
 DEFAULT_COMPONENT_CONFIG_FOLDER_DIR = "component_config"
 DEFAULT_FILE_NAME = "generated.md"
+
+logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 
 def create_dir(directory):
@@ -18,7 +21,7 @@ def generate_readme(data_dir: str = DEFAULT_DATA_FOLDER_DIR,
                     component_config_dir: str = DEFAULT_COMPONENT_CONFIG_FOLDER_DIR,
                     file_name: str = DEFAULT_FILE_NAME,
                     write_live: bool = False):
-    print(write_live)
+    logging.info(write_live)
     if not write_live:
         create_dir("generated")
         create_dir("generated/readme")
@@ -31,7 +34,7 @@ def generate_readme(data_dir: str = DEFAULT_DATA_FOLDER_DIR,
     else:
         output_loc = os.path.join("generated", "readme", file_name)
 
-    print(f"Saving readme to {output_loc}")
+    logging.info(f"Saving readme to {output_loc}")
     rm.save_readme(output_loc)
 
 
