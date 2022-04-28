@@ -5,9 +5,6 @@
 
 from setuptools import setup
 
-with open('requirements.txt') as req_file:
-    requirements = req_file.read().splitlines()
-
 setup(
     name='kcf-tools',
     version='0.0.1',
@@ -28,7 +25,13 @@ setup(
     },
     include_package_data=True,
     python_requires='>=3.7',
-    install_requires=requirements,
+    install_requires=[
+        'click',
+        'Jinja2==3.1.1',
+        'prompt_toolkit==1.0.14',
+        'PyInquirer==1.0.3',
+        'Pygments==2.11.2'
+    ],
     zip_safe=False,
     keywords='obs-img-utils obs_img_utils',
     classifiers=[
