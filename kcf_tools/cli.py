@@ -1,6 +1,8 @@
 import click
 import logging
 
+from kcf_tools import generate
+
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
@@ -35,6 +37,7 @@ def generate_readme(w):
     """This function generates a README file for your component"""
     logging.info("Generating Readme...")
     logging.info(f"write : {w}")
+    generate.generate_readme()
 
 
 @click.command(name='docs', short_help='generate help.keboola.com documentation for component')
