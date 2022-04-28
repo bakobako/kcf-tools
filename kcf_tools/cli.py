@@ -2,6 +2,7 @@ import click
 import logging
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+logging.basicConfig(level=logging.INFO)
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
@@ -19,7 +20,7 @@ def main(context):
 @click.group()
 def generate():
     """
-    Generate commands.
+    Command for generating specific files like readme and config schemas.
     """
 
 
@@ -29,12 +30,12 @@ def generate_readme():
     logging.info("Generating Readme...")
 
 
-@click.command(name='help', short_help='generate help.keboola.com documentation for component')
-def generate_help():
+@click.command(name='docs', short_help='generate help.keboola.com documentation for component')
+def generate_docs():
     """This function generates documentation for help.keboola.com for your component"""
     logging.info("Generating Help...")
 
 
 generate.add_command(generate_readme)
-generate.add_command(generate_help)
+generate.add_command(generate_docs)
 main.add_command(generate)

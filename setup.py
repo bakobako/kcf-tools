@@ -20,7 +20,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'kcf_tools=kcf_tools.cli:main'
+            'kcf-tools=kcf_tools.cli:main'
         ]
     },
     include_package_data=True,
