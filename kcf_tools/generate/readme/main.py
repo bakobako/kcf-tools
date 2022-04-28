@@ -5,38 +5,35 @@ from .readme_maker import ReadMeMaker
 
 DEFAULT_DATA_FOLDER_DIR = "data"
 DEFAULT_COMPONENT_CONFIG_FOLDER_DIR = "component_config"
-DEFAULT_FILE_NAME = "generated.md"
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 
-def create_dir(directory):
+def create_dir(directory: str) -> None:
     generated_folder = directory
     isExist = os.path.exists(generated_folder)
     if not isExist:
         os.mkdir(generated_folder)
 
 
-def generate_readme(data_dir: str = DEFAULT_DATA_FOLDER_DIR,
-                    component_config_dir: str = DEFAULT_COMPONENT_CONFIG_FOLDER_DIR,
-                    file_name: str = DEFAULT_FILE_NAME,
-                    write_live: bool = False):
-    logging.info(write_live)
-    if not write_live:
-        create_dir("generated")
-        create_dir("generated/readme")
+def generate_readme(write_live: bool,
+                    data_dir: str = DEFAULT_DATA_FOLDER_DIR,
+                    component_config_dir: str = DEFAULT_COMPONENT_CONFIG_FOLDER_DIR) -> None:
+    """
+    Generates a readme based on the component configuration schema and the configuration JSON file
+    Args:
+        write_live (bool): Write to live readme file if true, if false write to 'generated/readme' directory
+        data_dir (str): relative location of the data directory
+        component_config_dir (str): relative location of the component configuration directory
 
-    rm = ReadMeMaker(component_config_dir, data_dir)
-    rm.generate_readme()
-
+    """
     if write_live:
         output_loc = os.path.join("README.md")
     else:
-        output_loc = os.path.join("generated", "readme", file_name)
+        create_dir("generated")
+        create_dir("generated/readme")
+        output_loc = os.path.join("generated", "readme", "README.md")
 
+    readme_maker = ReadMeMaker(component_config_dir, data_dir)
     logging.info(f"Saving readme to {output_loc}")
-    rm.save_readme(output_loc)
-
-
-if __name__ == "__main__":
-    generate_readme()
+    readme_maker.generate_readme(output_loc)

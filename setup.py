@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='kcf-tools',
-    version='0.0.12',
+    version='0.0.14',
     description="CLI tools for generating documentation and config schemas for Keboola Component development",
     long_description="readme",
     long_description_content_type="text/markdown",
@@ -15,7 +15,7 @@ setup(
     author_email='adam.bako@keboola.com',
     url='https://github.com/bakobako/kcf-tools',
     packages=find_packages(),
-    package_data={'kcf_tools.generate.readme.templates': ['readme_template.md']},
+    package_data={'': ['*.md']},
     package_dir={
         'kcf_tools': 'kcf_tools'
     },

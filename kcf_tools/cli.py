@@ -55,8 +55,7 @@ def generate():
 @click.command(name='readme', short_help='generate readme for component')
 def generate_readme(w: bool):
     """This function generates a README file for your component"""
-    logging.info("Generating Readme...")
-    logging.info(f"write : {w}")
+    logging.info("Generating ReadMe File...")
     check_directories()
     gen.generate_readme(write_live=w)
 
@@ -65,8 +64,47 @@ def generate_readme(w: bool):
 def generate_docs():
     """This function generates documentation for help.keboola.com for your component"""
     logging.info("Generating Help...")
+    check_directories()
+    gen.generate_help_doc()
+
+
+@click.command(name='key_definitions', short_help='generate key definitions based on your config.json')
+def generate_key_definitions():
+    """This function generates key definitions based on your config.json"""
+    logging.info("Generating Key Definitions...")
+    check_directories()
+    gen.generate_key_definitions()
+
+
+@click.option(
+    '-w',
+    is_flag=True,
+    help='Writes client to component src'
+)
+@click.command(name='client', short_help='generate HTTP client for component')
+def generate_client(w: bool):
+    """This function generates a HTTP client for your component with the keboola.http_client library"""
+    logging.info("Generating Client...")
+    check_directories()
+    gen.generate_client(write_live=w)
+
+
+@click.option(
+    '-w',
+    is_flag=True,
+    help='Writes config schema to component_config'
+)
+@click.command(name='config_schema', short_help='generate config schema for component')
+def generate_config_schema(w: bool):
+    """This function generates a config schema for your component based on your config.json"""
+    logging.info("Generating Client...")
+    check_directories()
+    gen.generate_config_schema(write_live=w)
 
 
 generate.add_command(generate_readme)
 generate.add_command(generate_docs)
+generate.add_command(generate_client)
+generate.add_command(generate_key_definitions)
+generate.add_command(generate_config_schema)
 main.add_command(generate)
