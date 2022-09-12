@@ -44,7 +44,7 @@ class ReadMeMaker:
         config_desc_str = ""
 
         title = data.get("title", "")
-        config_desc_str += "##" + title + "\n"
+        config_desc_str += f"##{title}" + "\n"
 
         required = data.get("required", [])
         for key in data["properties"]:
@@ -57,6 +57,20 @@ class ReadMeMaker:
             row = "".join(
                 [" - ", data["properties"][key]["title"], " (", key, ") - [", opt, "] ", description])
             config_desc_str += row + "\n"
+            # TODO do this recursively
+            if data["properties"][key].get("type") == "object":
+                sub_required = data["properties"][key].get("required", [])
+                for sub_key in data["properties"][key]["properties"]:
+                    opt = "OPT"
+                    if sub_key in sub_required:
+                        opt = "REQ"
+                    description = "description"
+                    if "description" in data["properties"][key]["properties"][sub_key]:
+                        description = data["properties"][key]["properties"][sub_key]["description"]
+                    row = "".join(
+                        [" - ", data["properties"][key]["properties"][sub_key]["title"],
+                         " (", sub_key, ") - [", opt, "] ", description])
+                    config_desc_str += row + "\n"
 
         return config_desc_str
 
