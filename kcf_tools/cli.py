@@ -97,9 +97,16 @@ def generate_client(w: bool):
 @click.command(name='config_schema', short_help='generate config schema for component')
 def generate_config_schema(w: bool):
     """This function generates a config schema for your component based on your config.json"""
-    logging.info("Generating Client...")
+    logging.info("Generating Config Schema...")
     check_directories()
     gen.generate_config_schema(write_live=w)
+
+
+@click.command(name='ui_block', short_help='add ui block to configSchema')
+def generate_ui_block():
+    """This function adds ui blocks to configSchemas"""
+    logging.info("Generating ui block...")
+    gen.generate_ui_block()
 
 
 generate.add_command(generate_readme)
@@ -107,4 +114,5 @@ generate.add_command(generate_docs)
 generate.add_command(generate_client)
 generate.add_command(generate_key_definitions)
 generate.add_command(generate_config_schema)
+generate.add_command(generate_ui_block)
 main.add_command(generate)
