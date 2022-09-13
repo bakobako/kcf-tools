@@ -1,4 +1,5 @@
-import ui_blocks
+from .ui_blocks import ssh_block, use_ssh_block, base_schema, sync_options_block, report_settings_block, \
+    sync_options_with_custom_field_block, destination_block
 import json
 from PyInquirer import prompt
 
@@ -95,32 +96,32 @@ def _get_schema(row=False):
 
 def _init_row_schema():
     print("ConfigRowSchema was empty, initializing it")
-    return ui_blocks.base_schema
+    return base_schema
 
 
 def _add_ui_block(block_name, schema):
     if block_name == "ssh":
         print("Adding SSH Block")
-        key_name = list(ui_blocks.use_ssh_block.keys())[0]
-        schema["properties"][key_name] = ui_blocks.use_ssh_block[key_name]
-        key_name = list(ui_blocks.ssh_block.keys())[0]
-        schema["properties"][key_name] = ui_blocks.ssh_block[key_name]
+        key_name = list(use_ssh_block.keys())[0]
+        schema["properties"][key_name] = use_ssh_block[key_name]
+        key_name = list(ssh_block.keys())[0]
+        schema["properties"][key_name] = ssh_block[key_name]
     elif block_name == "sync-options":
         print("Adding Sync Options Block")
-        key_name = list(ui_blocks.sync_options_block.keys())[0]
-        schema["properties"][key_name] = ui_blocks.sync_options_block[key_name]
+        key_name = list(sync_options_block.keys())[0]
+        schema["properties"][key_name] = sync_options_block[key_name]
     elif block_name == "sync-options-with-custom-field":
         print("Adding Sync Options with custom Incremental Field Block")
-        key_name = list(ui_blocks.sync_options_with_custom_field_block.keys())[0]
-        schema["properties"][key_name] = ui_blocks.sync_options_with_custom_field_block[key_name]
+        key_name = list(sync_options_with_custom_field_block.keys())[0]
+        schema["properties"][key_name] = sync_options_with_custom_field_block[key_name]
     elif block_name == "destination":
         print("Adding Destination Block")
-        key_name = list(ui_blocks.destination_block.keys())[0]
-        schema["properties"][key_name] = ui_blocks.destination_block[key_name]
+        key_name = list(destination_block.keys())[0]
+        schema["properties"][key_name] = destination_block[key_name]
     elif block_name == "report-settings":
         print("Adding Report Settings Block")
-        key_name = list(ui_blocks.report_settings_block.keys())[0]
-        schema["properties"][key_name] = ui_blocks.report_settings_block[key_name]
+        key_name = list(report_settings_block.keys())[0]
+        schema["properties"][key_name] = report_settings_block[key_name]
     return schema
 
 

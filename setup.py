@@ -17,7 +17,7 @@ project_urls = {
 
 setup(
     name='kcf-tools',
-    version='0.1.4',
+    version='0.1.5',
     description="CLI tools for generating documentation and config schemas for Keboola Component development",
     long_description=long_description,
     long_description_content_type="text/markdown",
